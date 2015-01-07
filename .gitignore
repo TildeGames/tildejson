@@ -3,3 +3,4 @@ CMakeFiles
 cmake_install.cmake
 lib
 Makefile
+src/tests/run-test

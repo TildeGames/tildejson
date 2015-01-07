@@ -26,3 +26,9 @@ add_library(
 
 # Linker options
 target_link_libraries(tildejson)
+
+
+add_custom_target(
+	tests
+	WORKING_DIRECTORY ./src/tests
+    COMMAND "./build.sh") 

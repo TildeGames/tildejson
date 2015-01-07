@@ -37,7 +37,7 @@ std::string JSONValue::toString(bool formatted, int tabSize)
 
 void JSONValue::read()
 {
-	std::cout << "Read JSONValue" << std::endl;
+	//std::cout << "Read JSONValue" << std::endl;
 
 	if (Lexer::sym == Lexer::STRING)
 	{

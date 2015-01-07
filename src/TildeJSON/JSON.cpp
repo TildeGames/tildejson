@@ -13,7 +13,7 @@ std::string JSON::toString(bool formatted)
 
 void JSON::read()
 {
-	std::cout << "Read JSON" << std::endl;
+	//std::cout << "Read JSON" << std::endl;
 
 	Lexer::next_sym();
 	this->object = new JSONObject();

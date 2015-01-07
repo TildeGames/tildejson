@@ -45,7 +45,7 @@ std::string JSONObject::toString(bool formatted, int tabSize)
 
 void JSONObject::read()
 {
-	std::cout << "Read JSONObject" << std::endl;
+	//std::cout << "Read JSONObject" << std::endl;
 
 	if (Lexer::sym != Lexer::LBRACE)
 		Lexer::syntax_error();
