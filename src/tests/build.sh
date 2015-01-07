@@ -1,1 +1,1 @@
-clang++ ./main.cpp -I../../include/ -L../../lib -ltildejson -o run-test
+clang++ ./run-test.cpp -I../../include/ -L../../lib -ltildejson -o run-test
