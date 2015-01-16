@@ -5,17 +5,43 @@ int  Lexer::sym = -1;
 float Lexer::num = 0;
 std::string Lexer::str = "";
 std::map<std::string,int> Lexer::symbols;
+std::stringstream Lexer::source;
+bool Lexer::useStr = false;
 
-void Lexer::init()
+bool Lexer::init(std::string file)
 {
+	Lexer::init();
+
+	std::ifstream ifs(file.c_str());
+
+	if (!ifs.is_open())
+    	return false;
+
+    std::string c((std::istreambuf_iterator<char>(ifs)),
+                  (std::istreambuf_iterator<char>()));
+
+    Lexer::source << c;
+
+    Lexer::useStr = true;
+
+	return true;
+}
+
+bool Lexer::init()
+{
+	Lexer::useStr = false;
 	Lexer::symbols["true"]  = Lexer::STRUE;
 	Lexer::symbols["false"] = Lexer::SFALSE;
 	Lexer::symbols["null"]  = Lexer::SNULL;
+	return true;
 }
 
 void Lexer::next_ch()
 {
-	ch = std::cin.get();
+	if (Lexer::useStr)
+		ch = Lexer::source.get();
+	else
+		ch = std::cin.get();
 }
 
 void Lexer::syntax_error()

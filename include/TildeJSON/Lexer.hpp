@@ -6,6 +6,7 @@
 #include <map>
 #include <cstdio>
 #include <sstream>
+#include <fstream>
 
 namespace Lexer
 {
@@ -17,8 +18,11 @@ namespace Lexer
 	extern int sym;
 	extern float num;
 	extern std::string str;
+	extern std::stringstream source;
+	extern bool useStr;
 
-	void init();
+	bool init(std::string file);
+	bool init();
 
 	void next_ch();
 
