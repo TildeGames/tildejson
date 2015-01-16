@@ -32,3 +32,8 @@ add_custom_target(
 	tests
 	WORKING_DIRECTORY ./src/tests
     COMMAND "./build.sh") 
+
+# Install target
+install(TARGETS tildejson
+        LIBRARY DESTINATION lib)
+install(DIRECTORY include/TildeJSON DESTINATION include)
