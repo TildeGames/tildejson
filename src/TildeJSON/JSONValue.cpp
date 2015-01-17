@@ -35,7 +35,7 @@ std::string JSONValue::toString(bool formatted, int tabSize)
 }
 
 
-void JSONValue::read()
+bool JSONValue::read()
 {
 	//std::cout << "Read JSONValue" << std::endl;
 
@@ -54,7 +54,8 @@ void JSONValue::read()
 	else if (Lexer::sym == Lexer::LBRACE)
 	{
 		this->obj = new JSONObject();
-		this->obj->read();
+		if (!this->obj->read())
+			return false;
 		this->type = "OBJECT";
 	}
 	else if (Lexer::sym == Lexer::RBRACKET)
@@ -65,6 +66,11 @@ void JSONValue::read()
 		this->type = "SYMBOL";
 		Lexer::next_sym();
 	}
-	else 
+	else
+	{
 		Lexer::syntax_error();
+		return false;
+	}
+
+	return true;
 }

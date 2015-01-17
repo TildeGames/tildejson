@@ -10,7 +10,7 @@ class JSON
 	public:
 		JSON();
 		std::string toString(bool formatted = false);
-		void read();
+		bool read();
 
 		JSONObject *object;
 };

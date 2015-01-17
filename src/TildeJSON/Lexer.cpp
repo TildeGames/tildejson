@@ -47,7 +47,6 @@ void Lexer::next_ch()
 void Lexer::syntax_error()
 {
 	std::cerr << "Syntax error" << std::endl;
-	exit(1);
 }
 
 void Lexer::next_sym()

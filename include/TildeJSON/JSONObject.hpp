@@ -13,7 +13,7 @@ class JSONObject
 	public:
 		JSONObject();
 		std::string toString(bool formatted = false, int tabSize = 0);
-		void read();
+		bool read();
 
 		std::map<std::string,JSONValue*> values;
 };

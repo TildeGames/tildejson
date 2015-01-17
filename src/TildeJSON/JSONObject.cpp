@@ -43,17 +43,23 @@ std::string JSONObject::toString(bool formatted, int tabSize)
 	return ss.str();
 }
 
-void JSONObject::read()
+bool JSONObject::read()
 {
 	//std::cout << "Read JSONObject" << std::endl;
 
 	if (Lexer::sym != Lexer::LBRACE)
+	{
 		Lexer::syntax_error();
+		return false;
+	}
 
 	Lexer::next_sym();
 
 	if (Lexer::sym != Lexer::STRING && Lexer::sym != Lexer::RBRACE)
+	{
 		Lexer::syntax_error();
+		return false;
+	}
 
 	while (Lexer::sym != Lexer::RBRACE)
 	{
@@ -67,20 +73,31 @@ void JSONObject::read()
 			Lexer::next_sym();
 
 			if (Lexer::sym != Lexer::COLON)
+			{
 				Lexer::syntax_error();
+				return false;
+			}
 			Lexer::next_sym();
 
 			JSONValue* v = new JSONValue();
-			v->read();
+			if (!v->read())
+				return false;
 
 			this->values[key] = v;
 
 			if (Lexer::sym != Lexer::RBRACE && Lexer::sym != Lexer::COMMA)
+			{
 				Lexer::syntax_error();
+				return false;
+			}
 		}
 		else
+		{
 			Lexer::syntax_error();
+			return false;
+		}
 	}
 
 	Lexer::next_sym();
+	return true;
 }

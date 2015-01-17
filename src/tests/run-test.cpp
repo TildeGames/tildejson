@@ -7,7 +7,9 @@ int main()
 	Lexer::init();
 
 	JSON *json = new JSON();
-	json->read();
+
+	if (!json->read())
+		return EXIT_FAILURE;
 
 	cout << "Raw" << endl;
 	cout << json->toString(false) << endl;
@@ -15,5 +17,5 @@ int main()
 	cout << "Formatted" << endl;
 	cout << json->toString(true) << endl;
 
-	return 0;
+	return EXIT_SUCCESS;
 }

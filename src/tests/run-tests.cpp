@@ -93,8 +93,8 @@ int main()
 	std::stringstream ssEnd;
 	ssEnd << "--------------------" << std::endl;
 	ssEnd << "End of tests :\n";
-	ssEnd << C_GREEN << "  " << succ << C_RESET << " succed" << std::endl;
-	ssEnd << C_RED << "  " << fail << C_RESET << " fail" << std::endl;
+	ssEnd << C_GREEN << "  " << succ << C_RESET << " success" << std::endl;
+	ssEnd << C_RED << "  " << fail << C_RESET << " failure" << std::endl;
 	ssEnd << "--------------------" << std::endl;
 	std::cout << ssEnd.str();
 		
