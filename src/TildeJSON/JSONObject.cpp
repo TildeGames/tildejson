@@ -101,3 +101,40 @@ bool JSONObject::read()
 	Lexer::next_sym();
 	return true;
 }
+
+JSONNode* JSONObject::jsonpath(std::string query)
+{
+	// Begin with '@'
+	if (query[0] != '@')
+		return NULL;
+
+	// Query is "@"
+	if (query.length() == 1)
+		return this;
+
+	// Begin with '@.'
+	if (query[1] != '.')
+		return NULL;
+
+	// Get child str
+	int idx = 2;
+	while (idx < query.length() && query[idx] != '.')
+		idx++;
+	std::string child = query.substr(2,idx-2);
+
+	if (this->values.count(child) > 0)
+	{
+		// The value is the last node in query
+		if (idx == query.length())
+			return this->values[child];
+
+		// Delegate query to child
+		else
+		{
+			std::string newQuery = '@' + query.substr(2+idx-2,query.length());
+			return this->values[child]->jsonpath(newQuery);
+		}
+	}
+
+	return NULL;
+}

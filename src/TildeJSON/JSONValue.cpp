@@ -74,3 +74,60 @@ bool JSONValue::read()
 
 	return true;
 }
+
+JSONNode* JSONValue::jsonpath(std::string query)
+{
+	// Begin with '@'
+	if (query[0] != '@')
+		return NULL;
+
+	// Query is "@"
+	if (query.length() == 1)
+		return this;
+
+	// Begin with '@.'
+	if (query[1] != '.')
+		return NULL;
+
+	// Can't get child of literal
+	if (this->type == "STRING" || this->type == "NUMBER" || this->type == "SYMBOL")
+		return NULL;
+
+	// Delegate
+	if (type == "OBJECT")
+		return this->obj->jsonpath(query);
+	else
+		std::cout << "NYI" << std::endl;
+
+	return NULL;
+}
+
+void JSONValue::setValueString(std::string string)
+{
+	this->num = 0;
+	this->obj = NULL;
+	this->sym = 0;
+
+	this->type = "STRING";
+	this->str = string;
+}
+
+void JSONValue::setValueNumber(int number)
+{
+	this->str = "";
+	this->obj = NULL;
+	this->sym = 0;
+
+	this->type = "NUMBER";
+	this->num = number;
+}
+
+void JSONValue::setValueSymbol(int symbol)
+{
+	this->str = "";
+	this->obj = NULL;
+	this->num = 0;
+
+	this->type = "SYMBOL";
+	this->sym = symbol;
+}

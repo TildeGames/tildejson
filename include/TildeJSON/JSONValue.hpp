@@ -6,15 +6,21 @@
 
 #include "Lexer.hpp"
 #include "JSONObject.hpp"
+#include "JSONNode.hpp"
 
 class JSONObject;
 
-class JSONValue
+class JSONValue : public JSONNode
 {
 	public:
 		JSONValue();
 		std::string toString(bool formatted = false, int tabSize = 0);
 		bool read();
+		JSONNode* jsonpath(std::string query);
+
+		void setValueString(std::string string);
+		void setValueNumber(int number);
+		void setValueSymbol(int symbol);
 
 		std::string type;
 		std::string str;

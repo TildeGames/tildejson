@@ -6,9 +6,9 @@ JSON::JSON()
 
 }
 
-std::string JSON::toString(bool formatted)
+std::string JSON::toString(bool formatted, int tabSize)
 {
-	return object->toString(formatted,0);
+	return object->toString(formatted,tabSize);
 }
 
 bool JSON::read()
@@ -28,4 +28,23 @@ bool JSON::read()
 	}
 
 	return true;
+}
+
+JSONNode* JSON::jsonpath(std::string query)
+{
+	// Begin with '$'
+	if (query[0] != '$')
+		return NULL;
+
+	// Query is "$"
+	if (query.length() == 1)
+		return this;
+
+	// Begin with '$.'
+	if (query[1] != '.')
+		return NULL;
+
+	// Delegate
+	query[0] = '@';
+	return this->object->jsonpath(query);
 }

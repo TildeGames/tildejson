@@ -4,13 +4,15 @@
 #include <string>
 
 #include "JSONObject.hpp"
+#include "JSONNode.hpp"
 
-class JSON
+class JSON : public JSONNode
 {
 	public:
 		JSON();
-		std::string toString(bool formatted = false);
+		std::string toString(bool formatted = false, int tabSize = 0);
 		bool read();
+		JSONNode* jsonpath(std::string query);
 
 		JSONObject *object;
 };
