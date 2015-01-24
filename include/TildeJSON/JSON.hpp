@@ -13,6 +13,7 @@ class JSON : public JSONNode
 		std::string toString(bool formatted = false, int tabSize = 0);
 		bool read();
 		JSONNode* jsonpath(std::string query);
+		bool write(std::string path);
 
 		JSONObject *object;
 };

@@ -30,6 +30,22 @@ bool JSON::read()
 	return true;
 }
 
+bool JSON::write(std::string path)
+{
+	std::ofstream file(path.c_str(), std::ofstream::out | std::ofstream::trunc);
+	if (!file)
+	{
+		std::cerr << "Can't open file to write" << std::endl;
+		return false;
+	}
+
+	std::string content = this->toString();
+	file << content;
+
+	file.close();
+	return true;
+}
+
 JSONNode* JSON::jsonpath(std::string query)
 {
 	// Begin with '$'
