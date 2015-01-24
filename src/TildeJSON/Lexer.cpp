@@ -29,10 +29,18 @@ bool Lexer::init(std::string file)
 
 bool Lexer::init()
 {
+	Lexer::ch = ' ';
+	Lexer::sym = -1;
+	Lexer::num = 0;
+	Lexer::str = "";
+	Lexer::symbols.clear();
+	Lexer::source.clear();
+	Lexer::source.str(std::string());
 	Lexer::useStr = false;
 	Lexer::symbols["true"]  = Lexer::STRUE;
 	Lexer::symbols["false"] = Lexer::SFALSE;
 	Lexer::symbols["null"]  = Lexer::SNULL;
+
 	return true;
 }
 
